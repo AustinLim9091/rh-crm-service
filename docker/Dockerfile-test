@@ -1,0 +1,13 @@
+FROM harbor-local.mvgx.com/ctx/ctx-centos-base:latest
+
+ENV TZ=Asia/Singapore
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY ./logs /data/logs
+COPY app.jar /usr/app/app.jar
+ADD https://wiki-local.mvgx.com/markdown/img/skywalking-agent.jar /usr/app/skywalking-agent.jar
+ADD https://wiki-local.mvgx.com/markdown/img/jacocoagent.jar /usr/jacocoagent/jacocoagent.jar
+
+EXPOSE 8080 8081 19903
+
+CMD ["java", "-jar", "-Xmx512m", "-Xms512m","-Xmn256m","-XX:NewRatio=4","-XX:SurvivorRatio=4", "-javaagent:/usr/jacocoagent/jacocoagent.jar=includes=*,output=tcpserver,address=0.0.0.0,port=19903", "-Dmock.host=http://ctx-mockserver:9033", "-Dapp.name=kyc-wallet-service", "-Dapp.env=local", "/usr/app/app.jar"]

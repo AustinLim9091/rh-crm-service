@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2zetkh468264c9i92yo.mysql.rds.aliyuncs.com:3306/ruihong?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ruihong
+    password: RuiHong@008
+
+feign:
+  client:
+    chainalysis-api:
+      url: https://api.chainalysis.com
+      token: e7b3407653523c0c66998755706c511bcdb2f02165096a236960a863426d2d4b
+
+    config:
+      default:
+        loggerLevel: full
+
+logging:
+  level:
+    feign.Logger: debug
