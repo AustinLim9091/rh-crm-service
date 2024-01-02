@@ -16,14 +16,14 @@ public class JinshujuService {
     private JinshujuAPI jinshujuAPI;
 
     public String syncDataFromJsj(){
-        String apiKey = "lZpHsTq7UYFpBgs_AlxB4w";
-        String apiSecret = "t_TYQwEkuqFR0evVIfeDKA";
+        String apiKey = "j67KM2MXZx8q5eWbQ0txGQ";
+        String apiSecret = "4bkOVp3JE3S-VY2lDXGGkw";
         String credentials = apiKey + ":" + apiSecret;
         String base64EncodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
         String token = "Basic " + base64EncodedCredentials;
 
         log.info("{}", token);
-        ResponseEntity<String> response = jinshujuAPI.pagedGetForms(token);
+        ResponseEntity<String> response = jinshujuAPI.pagedGetForms();
         return response.getBody();
     }
 }

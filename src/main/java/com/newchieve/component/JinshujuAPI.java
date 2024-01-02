@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(value = "jinshujuAPI" ,url ="https://jinshuju.net")
 public interface JinshujuAPI {
 
-	@GetMapping(value = "/api/v1/forms", headers = {"Content-Type=application/json", "Accept=application/json", "Authorization={token}"})
-	ResponseEntity<String> pagedGetForms(@Param ("token") String token);
+	@GetMapping(value = "/api/v1/forms", headers = {"Content-Type=application/json", "Accept=application/json", "Authorization=Basic ajY3S00yTVhaeDhxNWVXYlEwdHhHUTo0YmtPVnAzSkUzUy1WWTJsRFhHR2t3"})
+	ResponseEntity<String> pagedGetForms();
 
 }
