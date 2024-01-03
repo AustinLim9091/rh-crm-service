@@ -1,4 +1,4 @@
-package com.newchieve.crm.entity;
+package com.newchieve.crm.entity.dto;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Response {
+public class FormListResponse {
 
 	private Long total,
 			count;

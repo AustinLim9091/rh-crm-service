@@ -1,4 +1,7 @@
-package com.newchieve.crm.entity;
+package com.newchieve.crm.entity.dto;
+
+import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -20,6 +23,8 @@ import lombok.ToString;
 public class Form {
 
 	private String name,
-			token;
+			token,
+			description;
+	private List<Map<String, Object>> fields;
 
 }

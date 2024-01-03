@@ -6,6 +6,7 @@ import com.newchieve.crm.service.JinshujuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +25,8 @@ public class AddressScreeningController {
 	@Operation(summary = "新建")
 	@GetMapping
 	public ResponseEntity<R> get() throws JsonProcessingException {
-        jinshujuService.syncDataFromJsj();
-        return ResponseEntity.ok(R.ok());
+		jinshujuService.syncDataFromJsj();
+		return ResponseEntity.ok(R.ok());
 	}
 
 }
