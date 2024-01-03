@@ -1,5 +1,6 @@
 package com.newchieve.crm.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.newchieve.component.entity.R;
 import com.newchieve.crm.service.JinshujuService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,9 +23,9 @@ public class AddressScreeningController {
 
 	@Operation(summary = "新建")
 	@GetMapping
-	public ResponseEntity<R<String>> get() {
-        String result = jinshujuService.syncDataFromJsj();
-        return ResponseEntity.ok(R.ok(result));
+	public ResponseEntity<R> get() throws JsonProcessingException {
+        jinshujuService.syncDataFromJsj();
+        return ResponseEntity.ok(R.ok());
 	}
 
 }

@@ -1,19 +1,53 @@
 spring:
+  application:
+    name: rh-crm-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://rm-2zetkh468264c9i92yo.mysql.rds.aliyuncs.com:3306/ruihong?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: ruihong
     password: RuiHong@008
+  cloud:
+    openfeign:
+      compression:
+        request:
+          enabled: true
+        response:
+          enabled: true
 
 feign:
   client:
-    chainalysis-api:
-      url: https://api.chainalysis.com
-      token: e7b3407653523c0c66998755706c511bcdb2f02165096a236960a863426d2d4b
     config:
       default:
         loggerLevel: full
+    jinshuju-api:
+      url: https://jinshuju.net
+      token: Basic ajY3S00yTVhaeDhxNWVXYlEwdHhHUTo0YmtPVnAzSkUzUy1WWTJsRFhHR2t3
 
 logging:
   level:
     feign.Logger: debug
+
+management:
+  server:
+    port: 8081
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+knife4j:
+  enable: true
+
+springdoc:
+  # use-management-port: true
+  # show-actuator: true
+  api-docs:
+    path: /v3/api-docs

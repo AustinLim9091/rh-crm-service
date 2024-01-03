@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds" debug="false">
+
+<!--	<springProperty scope="context" name="APP_NAME" source="spring.application.name"/>-->
+	<property name="LOG_PATTERN" value=" %d{yyyy-MM-dd HH:mm:ss.SSS} | %contextName | [%thread] | %-5level | %logger{36}:%L | %msg %n" />
+	<contextName>${APP_NAME}</contextName>
+
+	<!--输出到控制台 ConsoleAppender-->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="stdout"/>
+	</root>
+</configuration>
