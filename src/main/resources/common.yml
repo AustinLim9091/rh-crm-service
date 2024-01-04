@@ -1,3 +1,17 @@
+server:
+  port: 9090
+management:
+  server:
+    port: 9091
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+
 spring:
   cloud:
     openfeign:
@@ -16,18 +30,6 @@ feign:
 logging:
   level:
     feign.Logger: debug
-
-management:
-  server:
-    port: 8081
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include:
-          - health
 
 mybatis-plus:
   configuration:

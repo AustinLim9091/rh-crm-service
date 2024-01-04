@@ -68,6 +68,14 @@ public class JinshujuService {
                             continue;
                         }
 
+                        Long count = customerService.lambdaQuery()
+                                .eq(Customer::getMobile, mobile)
+                                .count();
+                        if(count > 0){
+                            log.warn("syncDataFromJsj. customer exist. continue. mobile: {}", mobile);
+                            continue;
+                        }
+
                         Customer c = Customer.builder()
                                 .name((String) m.get(keyName))
                                 .mobile((String) m.get(keyMobile))
