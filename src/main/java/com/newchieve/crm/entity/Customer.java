@@ -25,11 +25,7 @@ public class Customer {
 
 	@Builder.Default
 	private int status = 0;
-//
-//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8", shape = JsonFormat.Shape.STRING)
-//	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-//	@JsonSerialize(using = LocalDateTimeSerializer.class)
+
 	private Long createTime;
 
 }
