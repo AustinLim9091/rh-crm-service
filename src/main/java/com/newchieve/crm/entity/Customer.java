@@ -21,10 +21,12 @@ public class Customer {
 
 	private String name,
 			mobile,
-			remark;
+			remark,
+            adviserStaffName;
 
-	@Builder.Default
-	private int status = 0;
+	private Integer status,
+            handleStatus,
+            adviserStaffId;
 
 	private Long createTime;
 
