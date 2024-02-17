@@ -1,6 +1,7 @@
 package com.newchieve.crm.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.newchieve.component.TencentLeadsAPI;
 import com.newchieve.component.entity.R;
 import com.newchieve.crm.entity.Customer;
 import com.newchieve.crm.service.CustomerService;
@@ -8,10 +9,13 @@ import com.newchieve.crm.service.JinshujuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.List;
 
 @Slf4j
@@ -54,4 +58,42 @@ public class CustomerController {
         }
     }
 
+    @Value("${feign.client.tencent-api.token}")
+    private String token;
+    @Value("${feign.client.tencent-api.secret}")
+    private String secret;
+    @Value("${feign.client.tencent-api.sign-algorithm}")
+    private String signAlgorithm;
+    @Autowired
+    private TencentLeadsAPI tencentLeadsAPI;
+
+    @GetMapping("/test")
+    public void test(){
+        String nonce = "2"; // 不超过 32 个字符，由调⽤⽅⾃⾏⽣成，每个请求都不重复
+        Long timestamp = System.currentTimeMillis() / 1000;
+        String signature = getSignature(signAlgorithm, token, timestamp, nonce, secret);
+        String start = "2023-12-25",
+                end = "2023-12-31";
+        ResponseEntity<String> resp = tencentLeadsAPI.getLeads(start, end, signature);
+        String body = resp.getBody();
+        log.info("test. body: {}", body);
+    }
+
+    private String getSignature(String signAlgorithm, String token, Long timestamp, String nonce, String secret) {
+        String seed;
+        switch (signAlgorithm) {
+            case "SHA1": {
+                seed = DigestUtils.sha1Hex(token + "." + timestamp + "." + secret);
+                break;
+            }
+            case "SHA256": {
+                seed = DigestUtils.sha256Hex(token + "." + timestamp + "." + secret);
+                break;
+            }
+            default: {
+                throw new RuntimeException("Not supported signature algorithm: " + signAlgorithm);
+            }
+        }
+        return Base64.getEncoder().encodeToString((token + "," + timestamp + "," + nonce + "," + seed).getBytes());
+    }
 }

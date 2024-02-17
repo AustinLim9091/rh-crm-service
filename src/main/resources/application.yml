@@ -15,6 +15,11 @@ feign:
     jinshuju-api:
       url: https://jinshuju.net
       token: Basic ajY3S00yTVhaeDhxNWVXYlEwdHhHUTo0YmtPVnAzSkUzUy1WWTJsRFhHR2t3
+    tencent-api:
+      url: https://leads.qq.com
+      token: 262560941707202032
+      secret: 223312172bb362a1d00e890c8c51af79
+      sign-algorithm: SHA256
 
 app:
   jsj-form-labels-for-name: [姓名,称呼,名字]

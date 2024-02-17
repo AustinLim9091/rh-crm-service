@@ -14,7 +14,7 @@ public class ScheduledTask {
 	@Autowired
 	private JinshujuService jinshujuService;
 
-	@Scheduled(fixedRate = 600000)
+//	@Scheduled(fixedRate = 600000)
 	public void syncData(){
 		log.info("syncData. started.");
 		try {
