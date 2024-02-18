@@ -1,7 +1,6 @@
-package com.newchieve.crm.entity.dto;
+package com.newchieve.crm.entity.dto.tencent;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -10,20 +9,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-/**
- * 金数据响应
- */
 @Data
 @Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FormResponse {
+public class LeadsResponseData {
 
-	private String name,
-			token,
-			description;
-	private List<Map<String, Object>> fields;
+	private List<Leads> list;
+
+	private LeadsResponsePageInfo pageInfo;
 
 }

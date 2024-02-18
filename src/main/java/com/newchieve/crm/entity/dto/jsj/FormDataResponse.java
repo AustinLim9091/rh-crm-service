@@ -1,6 +1,7 @@
-package com.newchieve.crm.entity.dto;
+package com.newchieve.crm.entity.dto.jsj;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -18,11 +19,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FormListResponse {
+public class FormDataResponse {
 
 	private Long total,
 			count;
 	private String next;
-	private List<Form> data;
+	private List<Map<String, Object>> data;
 
 }

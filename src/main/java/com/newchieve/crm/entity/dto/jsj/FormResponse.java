@@ -1,4 +1,4 @@
-package com.newchieve.crm.entity.dto;
+package com.newchieve.crm.entity.dto.jsj;
 
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 表单数据
- * https://open.jinshuju.net/#/api_v1/endpoints/get_forms
+ * 金数据响应
  */
 @Data
 @Builder
@@ -20,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Form {
+public class FormResponse {
 
 	private String name,
 			token,

@@ -10,10 +10,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newchieve.component.JinshujuAPI;
 import com.newchieve.crm.config.AppConfig;
 import com.newchieve.crm.entity.Customer;
-import com.newchieve.crm.entity.dto.Form;
-import com.newchieve.crm.entity.dto.FormDataResponse;
-import com.newchieve.crm.entity.dto.FormListResponse;
-import com.newchieve.crm.entity.dto.FormResponse;
+import com.newchieve.crm.entity.dto.jsj.Form;
+import com.newchieve.crm.entity.dto.jsj.FormDataResponse;
+import com.newchieve.crm.entity.dto.jsj.FormListResponse;
+import com.newchieve.crm.entity.dto.jsj.FormResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class JinshujuService {
     @Autowired
     private CustomerService customerService;
 
-    public void syncDataFromJsj() throws JsonProcessingException {
+    public void syncData() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 //        获取首页表单列表
         ResponseEntity<String> r = jinshujuAPI.getFormList(null);
@@ -68,14 +68,6 @@ public class JinshujuService {
                             continue;
                         }
 
-                        Long count = customerService.lambdaQuery()
-                                .eq(Customer::getMobile, mobile)
-                                .count();
-                        if(count > 0){
-                            log.warn("syncDataFromJsj. customer exist. continue. mobile: {}", mobile);
-                            continue;
-                        }
-
                         Customer c = Customer.builder()
                                 .name((String) m.get(keyName))
                                 .mobile((String) m.get(keyMobile))
@@ -83,7 +75,7 @@ public class JinshujuService {
                                 .remark("jsj_" + f.getName())
                                 .build();
 //                        客户信息入库
-                        customerService.save(c);
+                        customerService.saveIfNotExist(c);
                     }
                 } catch (Exception e){
                     log.error("syncDataFromJsj. form: {}, msg: {}, stacktrace: {}", f.getToken(), e.getMessage(), e.getStackTrace());

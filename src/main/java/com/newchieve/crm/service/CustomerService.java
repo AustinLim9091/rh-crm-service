@@ -11,4 +11,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService extends ServiceImpl<CustomerMapper, Customer> {
 
+	public boolean saveIfNotExist(Customer c){
+		boolean exists = this.exists(c.getMobile());
+		if(exists){
+			return false;
+		}
+
+//		return this.save(c);
+		log.info("saveIfNotExist. save: {}", c);
+		return true;
+	}
+
+	public boolean exists(String mobile){
+		Long count = this.lambdaQuery()
+				.eq(Customer::getMobile, mobile)
+				.count();
+		if(count > 0){
+			log.warn("exists. customer exist. mobile: {}", mobile);
+			return true;
+		}
+		return false;
+	}
+
 }
