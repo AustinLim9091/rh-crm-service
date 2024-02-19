@@ -1,5 +1,7 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newchieve.Application;
+import com.newchieve.crm.entity.dto.tencent.Leads;
 import com.newchieve.crm.service.TencentLeadsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,5 +24,13 @@ public class TencentLeadsServiceTest {
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Test
+	void testJson() throws JsonProcessingException {
+		String s = "{\"account_id\":26256094,\"leads_id\":409057785,\"click_id\":\"wx036mb7kldznjrg00\"}";
+		ObjectMapper objectMapper = new ObjectMapper();
+		Leads l = objectMapper.readValue(s, Leads.class);
+		System.out.println(l);
 	}
 }

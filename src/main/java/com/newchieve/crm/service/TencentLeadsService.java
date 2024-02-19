@@ -48,12 +48,14 @@ public class TencentLeadsService {
         ObjectMapper objectMapper = new ObjectMapper();
         LeadsResponse response = objectMapper.readValue(r.getBody(), LeadsResponse.class);
 
+        log.info("resp: {}", response);
+
         while (response.getData() != null && CollUtil.isNotEmpty(response.getData().getList())){
             for (Leads l : response.getData().getList()) {
                 Customer c = Customer.builder()
-                        .name(l.getLeadsName())
-                        .mobile(l.getLeadsTel())
-//                        .createTime(DateUtil.parseDate(l.getLeadsCreateTime()).toInstant().toEpochMilli() / 1000)
+                        .name(l.getLeads_name())
+                        .mobile(l.getLeads_tel())
+                        .createTime(DateUtil.parseDate(l.getLeads_create_time()).toInstant().toEpochMilli() / 1000)
                         .extensionData(BeanUtil.beanToMap(l))
                         .build();
                 customerService.saveIfNotExist(c);
