@@ -32,7 +32,8 @@ public class Customer {
 	private Integer status,
             handleStatus,
             adviserStaffId,
-			projectId;
+			projectId,
+            source;
 
 	private Long createTime;
 

@@ -62,6 +62,7 @@ public class TencentLeadsService {
                         .projectName(l.getLeads_nationality())
                         .createTime(DateUtil.parseDateTime(l.getLeads_create_time()).toInstant().toEpochMilli() / 1000)
                         .extensionData(BeanUtil.beanToMap(l))
+                        .source(12)
                         .build();
 
                 Country country = countryService.findByName(l.getLeads_nationality());
