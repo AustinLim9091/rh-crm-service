@@ -9,6 +9,7 @@ import cn.hutool.core.util.IdUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newchieve.component.TencentLeadsAPI;
+import com.newchieve.crm.entity.Country;
 import com.newchieve.crm.entity.Customer;
 import com.newchieve.crm.entity.dto.tencent.Leads;
 import com.newchieve.crm.entity.dto.tencent.LeadsResponse;
@@ -34,6 +35,8 @@ public class TencentLeadsService {
     private TencentLeadsAPI tencentLeadsAPI;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private CountryService countryService;
 
     public void syncData() throws JsonProcessingException {
         int page = 1,
@@ -53,11 +56,19 @@ public class TencentLeadsService {
         while (response.getData() != null && CollUtil.isNotEmpty(response.getData().getList())){
             for (Leads l : response.getData().getList()) {
                 Customer c = Customer.builder()
+                        .status(0)
                         .name(l.getLeads_name())
                         .mobile(l.getLeads_tel())
-                        .createTime(DateUtil.parseDate(l.getLeads_create_time()).toInstant().toEpochMilli() / 1000)
+                        .projectName(l.getLeads_nationality())
+                        .createTime(DateUtil.parseDateTime(l.getLeads_create_time()).toInstant().toEpochMilli() / 1000)
                         .extensionData(BeanUtil.beanToMap(l))
                         .build();
+
+                Country country = countryService.findByName(l.getLeads_nationality());
+                if(country!=null) {
+                    c.setProjectId(country.getId());
+                }
+
                 customerService.saveIfNotExist(c);
             }
 

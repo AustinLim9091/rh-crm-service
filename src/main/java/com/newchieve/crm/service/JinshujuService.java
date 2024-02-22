@@ -69,6 +69,7 @@ public class JinshujuService {
                         }
 
                         Customer c = Customer.builder()
+                                .status(0)
                                 .name((String) m.get(keyName))
                                 .mobile((String) m.get(keyMobile))
                                 .createTime(ZonedDateTime.parse(m.get("updated_at").toString()).toInstant().toEpochMilli() / 1000)

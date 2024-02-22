@@ -26,11 +26,13 @@ public class Customer {
 	private String name,
 			mobile,
 			remark,
-            adviserStaffName;
+            adviserStaffName,
+			projectName;
 
 	private Integer status,
             handleStatus,
-            adviserStaffId;
+            adviserStaffId,
+			projectId;
 
 	private Long createTime;
 

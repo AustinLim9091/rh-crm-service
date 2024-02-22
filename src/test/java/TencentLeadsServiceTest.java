@@ -1,3 +1,4 @@
+import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newchieve.Application;
@@ -32,5 +33,11 @@ public class TencentLeadsServiceTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Leads l = objectMapper.readValue(s, Leads.class);
 		System.out.println(l);
+	}
+
+	@Test
+	void testDate(){
+		long epochMilli = DateUtil.parseDateTime("2024-02-22 14:01:48").toInstant().toEpochMilli() / 1000;
+		System.out.println(epochMilli);
 	}
 }
