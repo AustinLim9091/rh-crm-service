@@ -5,6 +5,7 @@ import com.newchieve.crm.service.TencentLeadsService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -16,7 +17,7 @@ public class ScheduledTask {
 	@Autowired
 	private TencentLeadsService tencentLeadsService;
 
-	//	@Scheduled(fixedRate = 600000)
+		@Scheduled(fixedRate = 600000)
 	public void syncJsjData(){
 		log.info("syncJsjData. started.");
 		try {
@@ -26,7 +27,7 @@ public class ScheduledTask {
 		}
 	}
 
-	//	@Scheduled(fixedRate = 600000)
+		@Scheduled(fixedRate = 600000)
 	public void syncTencentLeadsData(){
 		log.info("syncTencentLeadsData. started.");
 		try {

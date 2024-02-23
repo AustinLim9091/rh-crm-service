@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 public class CustomerService extends ServiceImpl<CustomerMapper, Customer> {
 
 	public boolean saveIfNotExist(Customer c){
-		log.info("c: {}", c);
-
 		boolean exists = this.exists(c.getMobile());
 		if(exists){
 			return false;
