@@ -33,7 +33,7 @@ public class Customer {
             handleStatus,
             adviserStaffId,
 			projectId,
-            source;
+            sourceChannel;
 
 	private Long createTime;
 
