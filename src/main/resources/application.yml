@@ -22,5 +22,5 @@ feign:
       sign-algorithm: SHA256
 
 app:
-  jsj-form-labels-for-name: [姓名,称呼,名字]
-  jsj-form-labels-for-mobile: [手机号,手机号码,手机]
+  jsj-form-labels-for-name: [姓名,称呼,名字,您的姓名,您的称呼,您的名字,学生姓名,家长姓名]
+  jsj-form-labels-for-mobile: [手机号,手机号码,手机,您的手机号码,您的手机,您的手机号,联系电话]
